@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio - Oktaviano</title>
+    
+    <!-- Menggunakan Tailwind CSS dari CDN untuk styling yang cepat dan modern -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome untuk icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Konfigurasi Tailwind Kustom -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Kustom CSS tambahan untuk efek dan animasi -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .dark .glass-effect {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        /* Animasi scroll fade in */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Timeline styling */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 6px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #3b82f6;
+            border: 3px solid #eff6ff;
+        }
+        .dark .timeline-item::before {
+            border-color: #1e293b;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 transition-colors duration-300">
+
+    <!-- Navigasi -->
+    <nav class="fixed w-full z-50 glass-effect transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo/Nama -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-xl font-bold text-primary-600 dark:text-primary-500 tracking-tight">Oktaviano.</a>
+                </div>
+                
+                <!-- Menu Desktop -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#about" class="text-sm font-medium hover:text-primary-600 dark:hover:text-primary-400 transition">Tentang</a>
+                    <a href="#skills" class="text-sm font-medium hover:text-primary-600 dark:hover:text-primary-400 transition">Keahlian</a>
+                    <a href="#experience" class="text-sm font-medium hover:text-primary-600 dark:hover:text-primary-400 transition">Pengalaman</a>
+                    <a href="#education" class="text-sm font-medium hover:text-primary-600 dark:hover:text-primary-400 transition">Pendidikan</a>
+                    <a href="#projects" class="text-sm font-medium hover:text-primary-600 dark:hover:text-primary-400 transition">Proyek</a>
+                    
+                    <!-- Tombol Dark Mode -->
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition">
+                        <i class="fas fa-moon dark:hidden text-slate-700"></i>
+                        <i class="fas fa-sun hidden dark:block text-yellow-400"></i>
+                    </button>
+                </div>
+
+                <!-- Tombol Menu Mobile -->
+                <div class="md:hidden flex items-center space-x-4">
+                    <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition">
+                        <i class="fas fa-moon dark:hidden text-slate-700"></i>
+                        <i class="fas fa-sun hidden dark:block text-yellow-400"></i>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-slate-600 dark:text-slate-300 hover:text-primary-600 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Menu Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition mobile-link">Tentang</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition mobile-link">Keahlian</a>
+                <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition mobile-link">Pengalaman</a>
+                <a href="#education" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition mobile-link">Pendidikan</a>
+                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition mobile-link">Proyek</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Bagian Hero (Beranda) -->
+    <section id="home" class="pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-12">
+        
+        <!-- Teks Hero -->
+        <div class="w-full lg:w-3/5 text-center lg:text-left">
+            <p class="text-primary-600 dark:text-primary-400 font-semibold mb-2 tracking-wide uppercase text-sm">Halo, saya</p>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-4 leading-tight">
+                Oktaviano
+            </h1>
+            <h2 class="text-xl sm:text-2xl text-slate-600 dark:text-slate-400 mb-6 font-medium">
+                Junior Network Engineer & IT Support
+            </h2>
+            <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                Lulusan SMK Teknik Komputer dan Jaringan dengan sertifikasi Omada Wireless. Memiliki pengalaman lapangan dalam inspeksi infrastruktur dan administrasi jaringan. Siap berkontribusi dengan dedikasi tinggi.
+            </p>
+            
+            <!-- Tombol CTA -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <a href="#contact" class="px-8 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition shadow-lg shadow-primary-500/30 flex items-center justify-center gap-2">
+                    <i class="fas fa-envelope"></i> Hubungi Saya
+                </a>
+                <button onclick="downloadResume()" class="px-8 py-3 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 hover:border-primary-600 dark:hover:border-primary-500 text-slate-700 dark:text-slate-200 font-medium rounded-lg transition flex items-center justify-center gap-2">
+                    <i class="fas fa-download"></i> Unduh CV
+                </button>
+            </div>
+            
+            <!-- Social Links -->
+            <div class="mt-8 flex gap-5 justify-center lg:justify-start">
+                <a href="https://linkedin.com/in/oktaviano" target="_blank" class="text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition text-2xl">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/okttvvno" target="_blank" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition text-2xl">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="mailto:oktaviano2007@gmail.com" class="text-slate-400 hover:text-red-500 transition text-2xl">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Gambar Hero / Visual -->
+        <div class="w-full sm:w-2/3 lg:w-2/5 flex justify-center">
+            <div class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
+                <!-- Background Hiasan -->
+                <div class="absolute inset-0 bg-gradient-to-tr from-primary-200 to-primary-100 dark:from-primary-900 dark:to-slate-800 rounded-full blur-2xl opacity-60 animate-pulse"></div>
+                <!-- Tempat Foto (Bisa diganti dengan tag <img> asli nantinya) -->
+                <div class="relative w-full h-full bg-slate-200 dark:bg-slate-800 rounded-full border-4 border-white dark:border-slate-700 shadow-xl overflow-hidden flex items-center justify-center">
+                    <!-- Placeholder menggunakan inisial jika foto tidak ada -->
+                    <span class="text-6xl sm:text-8xl font-bold text-slate-400 dark:text-slate-600">O</span>
+                    <!-- Hapus tag <span> di atas dan uncomment baris di bawah jika ingin menggunakan foto -->
+                    <!-- <img src="URL_FOTO_ANDA" alt="Oktaviano" class="w-full h-full object-cover"> -->
+                </div>
+                
+                <!-- Badge Mengambang -->
+                <div class="absolute bottom-4 -right-4 sm:bottom-8 sm:-right-8 bg-white dark:bg-slate-800 p-3 sm:p-4 rounded-xl shadow-lg border border-slate-100 dark:border-slate-700 flex items-center gap-3 animate-bounce" style="animation-duration: 3s;">
+                    <div class="text-green-500 text-xl sm:text-2xl"><i class="fas fa-network-wired"></i></div>
+                    <div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Sertifikasi</p>
+                        <p class="text-sm font-bold text-slate-800 dark:text-slate-200">OCNA Wireless</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bagian Tentang Saya & Core Competencies -->
+    <section id="about" class="py-20 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center mb-16 fade-in-section">
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-4">Profil Singkat</h2>
+                <div class="w-16 h-1 bg-primary-600 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-12 items-start">
+                
+                <!-- Teks Ringkasan -->
+                <div class="w-full lg:w-1/2 fade-in-section">
+                    <div class="bg-slate-50 dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 h-full">
+                        <h3 class="text-2xl font-semibold text-slate-800 dark:text-slate-200 mb-6 flex items-center gap-3">
+                            <i class="fas fa-user-circle text-primary-600"></i> Profesional Summary
+                        </h3>
+                        <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                            Saya adalah Lulusan SMK Pancakarya jurusan Teknik Komputer dan Jaringan (TKJ) yang memiliki dasar kuat dalam infrastruktur telekomunikasi dan jaringan nirkabel.
+                        </p>
+                        <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                            Saya telah berpengalaman lapangan melalui program PKL di PT Infrastruktur Telekomunikasi Indonesia (Telkominfra) dalam inspeksi aset jaringan dan administrasi data.
+                        </p>
+                        <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                            Secara aktif meningkatkan keahlian melalui Best-Path Academy dan siap berkontribusi sebagai Junior Network Engineer, IT Support, atau Field Technician dengan kemampuan adaptasi yang cepat.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Core Competencies -->
+                <div class="w-full lg:w-1/2 fade-in-section" id="skills">
+                    <h3 class="text-2xl font-semibold text-slate-800 dark:text-slate-200 mb-6 flex items-center gap-3">
+                        <i class="fas fa-tools text-primary-600"></i> Kompetensi Inti
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Skill 1 -->
+                        <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition group">
+                            <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-3 group-hover:scale-110 transition">
+                                <i class="fas fa-wifi text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-slate-800 dark:text-slate-200 mb-1">Networking</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">Wireless Basics, Omada SDN, Cable & Pole Inspection.</p>
+                        </div>
+
+                        <!-- Skill 2 -->
+                        <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition group">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-3 group-hover:scale-110 transition">
+                                <i class="fab fa-windows text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-slate-800 dark:text-slate-200 mb-1">Software & OS</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">Windows OS, MS Office/Workspace, Git & GitHub Actions.</p>
+                        </div>
+
+                        <!-- Skill 3 -->
+                        <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition group">
+                            <div class="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-3 group-hover:scale-110 transition">
+                                <i class="fas fa-clipboard-list text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-slate-800 dark:text-slate-200 mb-1">Administrative & Field</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">Data Entry, Physical Auditing, Administrative Reporting.</p>
+                        </div>
+
+                        <!-- Skill 4 -->
+                        <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition group">
+                            <div class="w-10 h-10 rounded-lg bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 flex items-center justify-center mb-3 group-hover:scale-110 transition">
+                                <i class="fas fa-users text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-slate-800 dark:text-slate-200 mb-1">Soft Skills</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">Problem Solving, Teamwork, Customer Service, Work Ethic.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bagian Pengalaman Kerja -->
+    <section id="experience" class="py-20 bg-slate-50 dark:bg-slate-900/50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center mb-16 fade-in-section">
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-4">Pengalaman Kerja</h2>
+                <div class="w-16 h-1 bg-primary-600 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="relative border-l-2 border-slate-200 dark:border-slate-700 ml-3 md:ml-6 space-y-12">
+                
+                <!-- Pengalaman 1 -->
+                <div class="relative pl-8 md:pl-12 timeline-item fade-in-section">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 gap-2">
+                        <h3 class="text-xl font-bold text-slate-800 dark:text-slate-200">Field & Data Entry Intern (PKL)</h3>
+                        <span class="inline-block px-3 py-1 bg-primary-100 dark:bg-primary-900/40 text-primary-700 dark:text-primary-400 text-sm font-medium rounded-full whitespace-nowrap">
+                            Des 2025 – Mar 2026
+                        </span>
+                    </div>
+                    <div class="mb-4">
+                        <p class="text-lg font-medium text-slate-700 dark:text-slate-300">
+                            PT Infrastruktur Telekomunikasi Indonesia (Telkominfra)
+                        </p>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">
+                            <i class="fas fa-map-marker-alt mr-1"></i> BSD, Tangerang Selatan
+                        </p>
+                    </div>
+                    <ul class="list-disc list-outside ml-4 text-slate-600 dark:text-slate-400 space-y-2">
+                        <li>Melakukan inspeksi dan pemantauan kondisi fisik infrastruktur tiang jaringan telekomunikasi di area lapangan.</li>
+                        <li>Melakukan pencatatan, verifikasi, dan penginputan data klien secara akurat ke dalam basis data perusahaan.</li>
+                        <li>Membantu tim teknis dalam penyusunan rekapitulasi data aset infrastruktur lapangan.</li>
+                    </ul>
+                </div>
+
+                <!-- Pengalaman 2 -->
+                <div class="relative pl-8 md:pl-12 timeline-item fade-in-section">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 gap-2">
+                        <h3 class="text-xl font-bold text-slate-800 dark:text-slate-200">Part-time Waiter</h3>
+                        <span class="inline-block px-3 py-1 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium rounded-full whitespace-nowrap">
+                            Desember 2025
+                        </span>
+                    </div>
+                    <div class="mb-4">
+                        <p class="text-lg font-medium text-slate-700 dark:text-slate-300">
+                            Maleeq Catering
+                        </p>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">
+                            <i class="fas fa-map-marker-alt mr-1"></i> Tangerang, Banten
+                        </p>
+                    </div>
+                    <ul class="list-disc list-outside ml-4 text-slate-600 dark:text-slate-400 space-y-2">
+                        <li>Melayani tamu acara, menjaga kerapihan area operasional, serta memastikan kelancaran alur pelayanan dengan komunikasi yang ramah dan sigap.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Bagian Pendidikan & Sertifikasi -->
+    <section id="education" class="py-20 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                
+                <!-- Pendidikan -->
+                <div class="fade-in-section">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 text-primary-600 rounded-xl flex items-center justify-center text-2xl">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Pendidikan</h2>
+                    </div>
+
+                    <div class="space-y-8">
+                        <!-- Pendidikan Formal -->
+                        <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-100 dark:border-slate-700 hover:border-primary-300 transition">
+                            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-200">Teknik Komputer dan Jaringan (TKJ)</h3>
+                            <p class="text-primary-600 dark:text-primary-400 font-medium my-1">SMK Pancakarya, Tangerang</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mb-3"><i class="far fa-calendar-alt mr-1"></i> Juni 2023 – Juni 2026</p>
+                        </div>
+
+                        <!-- Pendidikan Non-Formal -->
+                        <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-100 dark:border-slate-700 hover:border-primary-300 transition">
+                            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-200">Network Training</h3>
+                            <p class="text-primary-600 dark:text-primary-400 font-medium my-1">Best-Path Academy (Non-Formal)</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mb-3"><i class="far fa-calendar-alt mr-1"></i> Agustus 2026 – Sekarang</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sertifikasi -->
+                <div class="fade-in-section">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 rounded-xl flex items-center justify-center text-2xl">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Lisensi & Sertifikasi</h2>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Cert 1 -->
+                        <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm">
+                            <div class="text-green-500 text-2xl pt-1">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 dark:text-slate-200">Omada Certified Network Administrator (OCNA) Routing & Switching</h4>
+                                <p class="text-sm text-slate-500 mt-1">TP-Link Systems Inc.</p>
+                            </div>
+                        </div>
+
+                        <!-- Cert 2 -->
+                        <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm">
+                            <div class="text-green-500 text-2xl pt-1">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 dark:text-slate-200">Omada Certified Network Administrator (OCNA) Wireless</h4>
+                                <p class="text-sm text-slate-500 mt-1">TP-Link Systems Inc.</p>
+                            </div>
+                        </div>
+
+                        <!-- Cert 3 -->
+                        <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm">
+                            <div class="text-green-500 text-2xl pt-1">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 dark:text-slate-200">VIGI Certified Security Associate (VCSA)</h4>
+                                <p class="text-sm text-slate-500 mt-1">TP-Link Systems Inc.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Bagian Proyek -->
+    <section id="projects" class="py-20 bg-slate-50 dark:bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center mb-16 fade-in-section">
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-4">Proyek & Inisiatif Teknis</h2>
+                <div class="w-16 h-1 bg-primary-600 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-md overflow-hidden border border-slate-200 dark:border-slate-700 group hover:-translate-y-1 transition duration-300 fade-in-section">
+                    <div class="p-6 md:p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-bold text-slate-800 dark:text-white">Automated GitHub Activity Logging</h3>
+                            <div class="text-3xl text-slate-300 dark:text-slate-600">
+                                <i class="fab fa-github"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-2 mb-4">
+                            <span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300 rounded">CI/CD</span>
+                            <span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300 rounded">GitHub Actions</span>
+                            <span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300 rounded">Automation</span>
+                        </div>
+
+                        <p class="text-slate-600 dark:text-slate-400 mb-6">
+                            Membangun workflow otomasi sederhana menggunakan GitHub Actions untuk mempelajari integrasi CI/CD pipeline dan pengelolaan repository secara otomatis.
+                        </p>
+
+                        <a href="https://github.com/okttvvno" target="_blank" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-semibold hover:underline">
+                            Lihat di GitHub <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Kontak -->
+    <footer id="contact" class="bg-slate-900 text-white pt-16 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-8 mb-12">
+                
+                <!-- Info Kontak -->
+                <div class="text-center md:text-left">
+                    <h2 class="text-3xl font-bold mb-6">Mari Terhubung</h2>
+                    <p class="text-slate-400 max-w-md mb-8">
+                        Tertarik untuk berdiskusi tentang peluang karir di bidang jaringan atau IT support? Jangan ragu untuk menghubungi saya.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-center md:justify-start gap-3 text-slate-300">
+                            <i class="fas fa-map-marker-alt text-primary-500 w-5"></i>
+                            <span>Tangerang, Banten, Indonesia</span>
+                        </div>
+                        <div class="flex items-center justify-center md:justify-start gap-3 text-slate-300">
+                            <i class="fas fa-phone-alt text-primary-500 w-5"></i>
+                            <a href="tel:+6281290463923" class="hover:text-white transition">+62 812 9046 3923</a>
+                        </div>
+                        <div class="flex items-center justify-center md:justify-start gap-3 text-slate-300">
+                            <i class="fas fa-envelope text-primary-500 w-5"></i>
+                            <a href="mailto:oktaviano2007@gmail.com" class="hover:text-white transition">oktaviano2007@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aksi Cepat -->
+                <div class="flex flex-col gap-4 w-full md:w-auto">
+                    <button onclick="copyEmail()" class="px-6 py-3 bg-slate-800 hover:bg-slate-700 rounded-lg transition border border-slate-700 flex items-center justify-center gap-2">
+                        <i class="far fa-copy"></i> Salin Email
+                    </button>
+                    <a href="https://wa.me/6281290463923" target="_blank" class="px-6 py-3 bg-green-600 hover:bg-green-700 rounded-lg transition text-center flex items-center justify-center gap-2">
+                        <i class="fab fa-whatsapp text-lg"></i> Hubungi via WhatsApp
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-slate-500 text-sm">
+                    &copy; 2026 Oktaviano. All rights reserved.
+                </p>
+                <div class="flex gap-4">
+                    <a href="https://linkedin.com/in/oktaviano" target="_blank" class="text-slate-400 hover:text-white transition"><i class="fab fa-linkedin text-xl"></i></a>
+                    <a href="https://github.com/okttvvno" target="_blank" class="text-slate-400 hover:text-white transition"><i class="fab fa-github text-xl"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notifikasi Pesan -->
+    <div id="toast" class="fixed bottom-4 right-4 bg-slate-800 text-white px-6 py-3 rounded-lg shadow-xl transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-3">
+        <i class="fas fa-check-circle text-green-400"></i>
+        <span id="toast-message">Pesan</span>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // 1. Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Tutup menu saat link mobile di klik
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // 2. Dark Mode Toggle
+        const html = document.documentElement;
+        const themeToggles = [document.getElementById('theme-toggle'), document.getElementById('theme-toggle-mobile')];
+        
+        // Cek preferensi sistem atau localStorage
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+
+        themeToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                html.classList.toggle('dark');
+                if (html.classList.contains('dark')) {
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+        });
+
+        // 3. Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-md');
+                if(html.classList.contains('dark')){
+                    navbar.style.background = 'rgba(15, 23, 42, 0.9)'; // Dark slate semi transparan
+                } else {
+                    navbar.style.background = 'rgba(255, 255, 255, 0.9)';
+                }
+            } else {
+                navbar.classList.remove('shadow-md');
+                navbar.style.background = ''; // Kembali ke class glass-effect css
+            }
+        });
+
+        // 4. Scroll Animation (Intersection Observer)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-section').forEach((section) => {
+            section.style.opacity = '0'; // Initial state
+            observer.observe(section);
+        });
+
+        // 5. Utility Functions
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            
+            toastMessage.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        function copyEmail() {
+            const email = "oktaviano2007@gmail.com";
+            // Gunakan metode yang didukung secara luas termasuk iframe
+            const textArea = document.createElement("textarea");
+            textArea.value = email;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast('Email disalin ke clipboard!');
+            } catch (err) {
+                console.error('Gagal menyalin text', err);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function downloadResume() {
+            // Karena file pdf aslinya ada di sistem lokal Anda saat ini,
+            // tombol ini dibuat simulasi atau memicu notifikasi.
+            // Dalam implementasi nyata, ganti href dengan path ke file PDF.
+            const a = document.createElement('a');
+            a.href = './Resume_Oktaviano.pdf'; // Ganti '# 'dengan './Resume_Oktaviano.pdf' saat di-hosting
+            
+            // Tampilkan pesan alih-alih mencoba mengunduh file yang tidak ada di lingkungan ini
+            showToast('Simulasi: Mengunduh Resume_Oktaviano.pdf');
+        }
+    </script>
+</body>
+</html>
