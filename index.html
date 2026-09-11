@@ -624,11 +624,14 @@
             // Karena file pdf aslinya ada di sistem lokal Anda saat ini,
             // tombol ini dibuat simulasi atau memicu notifikasi.
             // Dalam implementasi nyata, ganti href dengan path ke file PDF.
-            const a = document.createElement('a');
-            a.href = './Resume_Oktaviano.pdf'; // Ganti '# 'dengan './Resume_Oktaviano.pdf' saat di-hosting
-            
-            // Tampilkan pesan alih-alih mencoba mengunduh file yang tidak ada di lingkungan ini
-            showToast('Simulasi: Mengunduh Resume_Oktaviano.pdf');
+           const a = document.createElement('a');
+                a.href = './Resume_Oktaviano.pdf';
+                a.download = 'Resume_Oktaviano.pdf';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+
+            showToast('CV berhasil diunduh!');
         }
     </script>
 </body>
